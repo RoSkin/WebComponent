@@ -11,18 +11,14 @@
 	
 	
 <script type="text/javascript">
-	
-	var calculs = function(){
+	function calculs(row, size, bgColor) {
 		this.row = row || 3;
 		this.size = size || 50;
-		this.bgColor=bgColor ||"#35a45f";				
+		this.bgColor=bgColor ||"#35a45f";
+		
 	}
 
-	
-
-	calculs.prototype = {
-	
-	show: function(){
+	calculs.prototype.show = function() {
 		var div = document.createElement("div");
 		div.className = "countbox";	
 		document.body.appendChild(div);	
@@ -59,18 +55,18 @@
 		
 		ul.appendChild(cleardiv);	
 
-	},
+	}
 	
 	
-	
-	oncalculClick :function(ev) {
+	var results="";
+	calculs.prototype.oncalculClick = function(ev) {
 		var index = ev.currentTarget.dataset.index;	
 		if(index==opertion.length-1){
 			span.innerHTML =eval(span.innerHTML);
 			results="";	
 		}else if(index==opertion.length-2){		
 			results="";
-			span.innerHTML="";
+			span.innerHTML=0;
 		}else{
 			var txt = ev.currentTarget.innerHTML;
 			results += txt;
@@ -81,7 +77,7 @@
 
 	
 	
-	var calculs = new calculs(4, 60 ,"#35a45f");//（列数/宽高/背景颜色)
+	var calculs = new calculs(7, 40 ,"#af8217");//（列数/宽高/背景颜色)
 	calculs.show();
 </script>
 </body>

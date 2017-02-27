@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VitaSwiper</title>
+	<style type="text/css">
+	*{margin:0;padding:0}
+	ul,li{list-style:none}
+	.swiper{width:500px;height:375px;margin:0 auto;position:relative;overflow:hidden}
+	.swiper img{width:500px;height:375px;float:left}
+	#ul{width: 8000px;height:800px;position: absolute;left: 0;transition:left 0.5s;z-index: 1;}
+	/*点点还未加
+	.pagination{position:absolute;bottom:0;width:100%;padding:10px 0;background:#f90;z-index:999;text-align:center}
+	.pagination span.on{background:#f00}
+	*/	
+	.prev{position:absolute;cursor:pointer;width:40px;height:60px;top:140px;background:#000;z-index:999999999;line-height:60px;text-align:center;font-size:24px;font-weight:bold;color:#fff;left:0;}
+	.next{position:absolute;cursor:pointer;width:40px;height:60px;top:140px;background:#000;z-index:999999999;line-height:60px;text-align:center;font-size:24px;font-weight:bold;color:#fff;right:0}
+	</style>
+</head>
+<body>
+	<div id="swiper" class="swiper">
+		<ul id="ul" style="left:0">
+			<li><img src="https://static.juksy.com/files/articles/57716/57e398d446db1.jpg?m=widen&i=600&e=jpg&q=75"></li>
+			<li><img src="http://imgx.xiawu.com/xzimg/i4/i4/T1TreFFbxfXXXXXXXX_!!0-item_pic.jpg"></li>
+			<li><img src="http://hk.mensuno.asia/sites/default/files/adidas_SS16_Outer%20Jacket_Eddie%203_1_0.jpg"></li>
+			<li><img src="http://desk.fd.zol-img.com.cn/t_s960x600c5/g5/M00/02/07/ChMkJ1bKy8GIHooWAAIni-vyc4kAALIuwPujCEAAiej078.jpg"></li>
+		</ul>
+	</div>
+	
+<script type="text/javascript">
+var Swiper = function(num, cursor, speed){
+	this.num = num || 4;
+	this.cursor = cursor;
+	this.speed = speed || 2000;
+	
+}
+
+var swiper = document.getElementById("swiper"),
+    picwidth = swiper.clientWidth, //图片宽度
+    lis = document.querySelectorAll("li");
+
+	
+Swiper.prototype = {
+
+	show : function(){
+		if(this.cursor){
+			Swiper.onCursor()
+		};
+		
+		this.go();
+		swiper.onmouseover = function(e){ Swiper.mouseOver();};//鼠标放上暂停
+		swiper.onmouseout = function(e){ Swiper.mouseOut();};//鼠标离开播放
+			
+	},
+	
+	go : function(){	
+		var speed = this.speed;
+		timer = setInterval(function(){
+			Swiper.play(-picwidth);				
+		},speed);
+			
+	},
+	
+	play : function(x){		
+		var scrollLeft = parseInt(ul.style.left)+x; //ul左偏移
+		ul.style.left=scrollLeft+'px';
+		if(scrollLeft==-(picwidth*lis.length)){ //ul左偏移等于图片宽度和 当前在最后一张 准备回第一张
+			ul.style.left=0+"px";
+		}else if(scrollLeft==picwidth){//ul左偏移0 当前第一张 准备回上一张
+			ul.style.left=-(picwidth*(lis.length-1))+'px';
+		}
+	},
+	
+	mouseOut: function(){	
+		this.go();
+	},
+
+	mouseOver: function(){		
+		this.stop();
+	},
+
+
+	stop :function(){
+		clearInterval(timer)
+	},
+	
+	onCursor : function(){			
+		var picwidth = swiper.clientWidth;
+		var next = document.createElement("div");
+		next.className = "next";
+		next.innerHTML = ">";
+		var prev = document.createElement("div");
+		var _this=this;
+		prev.className = "prev";
+		prev.innerHTML = "<";
+		swiper.appendChild(next);
+		swiper.appendChild(prev);
+		
+		next.onclick=function(){			
+			_this.play(-picwidth);	
+		}
+		
+		prev.onclick=function(){			
+			_this.play(picwidth);	
+		}
+		
+		
+	},
+	
+	
+	
+}
+
+
+
+
+var Swiper = new Swiper(4, true, 1000);//几张(暂时没用) 要不要左右 速度
+	Swiper.show();
+
+
+</script>
+</body>
+</html>
