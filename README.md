@@ -1,5 +1,5 @@
-![img](https://github.com/MMMsCheng/JS/blob/master/img/res.png)   
+Some things are let there is nothing I can do Work experience in Peking University degree can buy can also be fraudulent The world where there are so many unfair Can't change others only want to live true!
 
-![img](https://github.com/MMMsCheng/JS/blob/master/img/res2.png)   
+Prototype JS
 
-![img](https://github.com/MMMsCheng/JS/blob/master/img/res3.png)   
+
