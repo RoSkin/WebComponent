@@ -1,0 +1,30 @@
+<script type="text/javascript">
+
+
+//ES6:在ES6中
+var { house, mouse} = $('body').data(); // we'll get house and mouse variables
+
+//ES5中
+var data = $('body').data(), // data has properties house and mouse
+   house = data.house,
+   mouse = data.mouse;
+
+
+
+//ES6:在ES 6odejs中
+var { jsonMiddleware } = require('body-parser');
+var { username, password } = req.body;
+
+//ES5:nodejs中
+var jsonMiddleware = require('body-parser').jsonMiddleware ;
+var body = req.body, // body has username and password
+   username = body.username,
+   password = body.password;  
+
+   
+   
+   
+var [col1, col2]  = $('.column'),
+[line1, line2, line3, , line5] = file.split('n');
+
+</script>

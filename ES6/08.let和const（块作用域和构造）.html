@@ -1,0 +1,59 @@
+<script type="text/javascript">
+//ES6 let限制块级作用域。而var是限制函数作用域
+function calculateTotalAmount (vip) {
+  var amount = 0; // probably should also be let, but you can mix var and let
+  if (vip) {
+    let amount = 1; // first amount is still 0
+  } 
+  { // more crazy blocks!
+    let amount = 100; // first amount is still 0
+    {
+      let amount = 1000; // first amount is still 0
+    }
+  }  
+  return amount;
+}
+ 
+console.log(calculateTotalAmount(true));//0
+
+
+
+//ES6 const不变量
+function calculateTotalAmount (vip) {
+  const amount = 0;  
+  if (vip) {
+    const amount = 1;
+  } 
+  { // more crazy blocks!
+    const amount = 100 ;
+    {
+      const amount = 1000;
+    }
+  }  
+  return amount;
+}
+console.log(calculateTotalAmount(true));//0
+
+
+//ES5 
+function calculateTotalAmount (vip) {
+  var amount = 0;
+  if (vip) {
+    var amount = 1;
+  }
+  { // more crazy blocks!
+    var amount = 100;
+    {
+      var amount = 1000;
+    }
+  }  
+  return amount;
+}
+console.log(calculateTotalAmount(true));//1000
+
+
+
+
+
+
+</script>

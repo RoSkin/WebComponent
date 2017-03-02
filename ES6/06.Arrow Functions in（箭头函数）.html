@@ -1,0 +1,77 @@
+<script type="text/javascript">
+
+
+//ES6   以前我们使用闭包，this总是预期之外地产生改变，而箭头函数的迷人之处在于，现在你的this可以按照你的预期使用了，身处箭头函数里面，this还是原来的this。
+//有了箭头函数在ES6中， 我们就不必用that = this或 self =  this  或 _this = this  或.bind(this)。例如，下面的代码用ES5就不是很优雅：
+
+$('.btn').click((event) =>{
+  this.sendData();
+})
+
+
+//ES5
+var _this = this;
+$('.btn').click(function(event){
+  _this.sendData();
+})
+   
+   
+   
+ 
+ 
+~~~~~~~~~~~~~~~~~~~~~~~~~~//通过call传递文本给logUpperCase() 
+
+var logUpperCase = function() {
+  var _this = this;
+ 
+  this.string = this.string.toUpperCase();
+  return function () {
+    return console.log(_this.string);
+  }
+}
+ 
+logUpperCase.call({ string: 'ES6 rocks' })();
+
+~  ~  ~
+
+var logUpperCase = function() {
+  this.string = this.string.toUpperCase();
+  return () => console.log(this.string);
+}
+logUpperCase.call({ string: 'ES6 rocks' })();
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~//创建数组
+var ids = ['5632953c4e345e145fdf2df8','563295464e345e145fdf2df9'];
+var messages = ids.map(function (value) {
+  return "ID is " + value; // explicit return
+});
+
+~  ~  ~
+
+var ids = ['5632953c4e345e145fdf2df8','563295464e345e145fdf2df9'];
+var messages = ids.map(value => `ID is ${value}`); // implicit return
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~//创建数组 多个参数
+var ids = ['5632953c4e345e145fdf2df8', '563295464e345e145fdf2df9'];
+var messages = ids.map(function (value, index, list) {
+  return 'ID of ' + index + ' element is ' + value + ' '; // explicit return
+});
+
+~  ~  ~
+
+var ids = ['5632953c4e345e145fdf2df8','563295464e345e145fdf2df9'];
+var messages = ids.map((value, index, list) => `ID of ${index} element is ${value} `);
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+</script>

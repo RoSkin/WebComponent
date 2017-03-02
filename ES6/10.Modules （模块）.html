@@ -1,0 +1,31 @@
+
+<script type="text/javascript">
+//ES5
+module.exports = {
+  port: 3000,
+  getAccounts: function() {
+    ...
+  }
+}
+
+var service = require('module.js');
+console.log(service.port); // 3000 
+
+
+
+//ES6
+export var port = 3000;
+export function getAccounts(url) {
+  ...
+}
+
+
+import {port, getAccounts} from 'module';
+console.log(port); // 3000
+//或者
+import * as service from 'module';
+console.log(service.port); // 3000
+
+
+
+</script>

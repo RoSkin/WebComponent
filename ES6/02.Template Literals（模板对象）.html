@@ -1,0 +1,18 @@
+<script type="text/javascript">
+var first = 0;
+var last = 9;
+var id = 2;
+
+
+//ES6:在ES6中，我们可以使用新的语法$ {NAME}，并把它放在反引号里：
+var name = `Your name is ${first} ${last}. `;
+var url = `http://localhost:3000/api/messages/${id}`;
+
+//ES5:在其它语言中，使用模板和插入值是在字符串里面输出变量的一种方式。因此，在ES5，我们可以这样组合一个字符串
+var name = 'Your name is ' + first + ' ' + last + '.';
+var url = 'http://localhost:3000/api/messages/' + id;
+
+
+alert(name+url)
+
+</script>

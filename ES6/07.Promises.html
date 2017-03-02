@@ -1,0 +1,53 @@
+<script type="text/javascript">
+//Promises 是一个有争议的话题。因此有许多略微不同的promise 实现语法。Q，bluebird，deferred.js，vow, avow, jquery 一些可以列出名字的。
+//也有人说我们不需要promises，仅仅使用异步，生成器，回调等就够了。
+
+
+
+
+//用setTimeout()实现的异步延迟加载函数:
+
+//ES6  
+var wait1000 =  new Promise(function(resolve, reject) {
+  setTimeout(resolve, 1000);
+}).then(function() {
+  console.log('Yay!');
+});
+
+
+//或者
+var wait1000 =  new Promise((resolve, reject)=> {
+  setTimeout(resolve, 1000);
+}).then(()=> {
+  console.log('Yay!');
+});
+
+
+//ES5
+setTimeout(function(){
+  console.log('Yay!');
+}, 1000);
+   
+   
+ 
+//多行重写 
+ setTimeout(function(){
+  console.log('Yay!');
+  setTimeout(function(){
+    console.log('Wheeyee!');
+  }, 1000)
+}, 1000);
+//在ES6中我们可以用promises重写：
+
+var wait1000 = ()=> new Promise((resolve, reject)=> {setTimeout(resolve, 1000)});
+wait1000()
+    .then(function() {
+        console.log('Yay!')
+        return wait1000()
+    })
+    .then(function() {
+        console.log('Wheeyee!')
+    });
+ 
+
+</script>
