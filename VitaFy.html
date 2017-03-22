@@ -1,0 +1,63 @@
+﻿<!DOCtype html>
+<html>
+<head>
+	<title>面向对象封装分页</title>
+</head>
+	
+<body>
+	<div id="txt"></div>	
+	<div id="txt2"></div>
+
+	
+	<script type="text/javascript" src="page.js"></script>
+	<script type="text/javascript">
+	var data1 = [
+		{"id":1,"name":"周杰伦"},
+		{"id":2,"name":"林俊杰"},
+		{"id":3,"name":"蔡依林"},
+		{"id":4,"name":"五月天"},
+		{"id":5,"name":"胡歌"},
+		{"id":6,"name":"杨幂"},
+		{"id":7,"name":"田馥甄"},
+		{"id":8,"name":"SHE"},
+		{"id":9,"name":"周杰伦"},
+		{"id":10,"name":"林俊杰"},
+		{"id":11,"name":"蔡依林"},
+		{"id":12,"name":"五月天"},
+		{"id":13,"name":"胡歌"},
+		{"id":14,"name":"杨幂"},
+		{"id":15,"name":"田馥甄"},
+		{"id":16,"name":"SHE"}
+		
+	];
+	
+	
+	
+	var data2 = [
+		{"id":1,"name":"周杰伦"},
+		{"id":2,"name":"林俊杰"},
+		{"id":3,"name":"蔡依林"},
+		{"id":4,"name":"五月天"},
+		{"id":5,"name":"胡歌"},
+		{"id":6,"name":"杨幂"},
+		{"id":7,"name":"田馥甄"},
+		{"id":8,"name":"SHE"},
+		{"id":9,"name":"周杰伦"},
+		{"id":10,"name":"林俊杰"},
+		{"id":11,"name":"蔡依林"},
+		{"id":12,"name":"五月天"},
+		{"id":13,"name":"胡歌"},
+		{"id":14,"name":"杨幂"},
+		{"id":15,"name":"田馥甄"},
+		{"id":16,"name":"SHE"}
+		
+	];
+	
+
+	var Page1 = new Page("#txt", 5, data1);//"选择器",几个分页,数据
+	var Page2 = new Page("#txt2", 6, data2);
+	
+	
+	</script>
+</body>
+</html>

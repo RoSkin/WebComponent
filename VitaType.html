@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>JS打字机效果</title>
+    <meta name="description" content="">
+    <meta name="author" content="Administrator">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+	<style type = "text/css">
+	#main {width: 80%;height: 750px;margin: auto;padding: 10px;background: #cfe1ca;border: 10px outset #f9c6aa;line-height: 30px;color: #9f3c61;font-size: 18px;}
+	p {text-indent: 30px;}
+	</style>
+</head>
+
+
+<body>
+	<div id ="txt"></div>
+	
+	<script type = "text/javascript">
+	"use strict";
+
+	const Type = function(element , str, speed){	
+		this.element = element;
+		this.str = str;
+		this.speed = speed;
+		this.sub = 0;	
+		this.len = this.str.length;	
+		this.typing=function(){
+			let _this=this;
+			document.querySelector(_this.element).innerHTML =  this.str.substring(0, _this.sub);			
+			if (_this.sub == this.len) {
+				_this.sub = 0;
+				clearTimeout(t);
+			}else{
+				_this.sub++;
+				var t = setTimeout(function(){
+					_this.typing();			
+				},this.speed);
+			
+			}
+			
+		}
+
+	}
+	
+	
+
+
+
+	
+	
+	
+	var str="今天你见彭于晏了吗，彭于晏好帅呀";
+	var Type1 = new Type("#txt", str, 100);//"输出选择器","字段", 速度
+	Type1.typing();
+</script>
+</body>
+</html>
