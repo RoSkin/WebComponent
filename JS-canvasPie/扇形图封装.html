@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>canvas画饼图</title>
+
+	<style>
+	*{ margin:0px; padding:0px;}
+	body{ text-align:center}
+	#can1{ width:400px; height:400px;}
+	</style>
+</head>
+
+
+<body>
+	
+	<canvas id="can1" width="400" height="400"></canvas>
+	<canvas id="can2" width="400" height="400"></canvas>
+	
+	<script type="text/javascript">
+		
+		var Canvas = function(ele,num){
+			this.ele = ele;
+			this.num = num;
+			this.ctx = this.ele.getContext("2d");		
+			this.color = ["#21a74f","#b3e5f1","#3498db","#2ecc71","#f1c40f","#e67e22"];
+			this.draw();
+		}
+		
+
+		
+		Canvas.prototype.draw=function(){
+			var j=0,j1=0,j2=0,angle=0;
+			var sum=0;
+			for(var i=0;i<this.num.length;i++){
+				sum=sum+this.num[i];
+			}
+			
+			for(var i=0;i<this.num.length;i++){
+				j=2*Math.PI*this.num[i]/sum;
+				j2=j1+j;
+				this.ctx.beginPath();
+				this.ctx.fillStyle=this.color[i];
+				this.ctx.arc(this.ele.width/2,this.ele.height/2,120,j1,j2,false);
+				this.ctx.lineTo(this.ele.width/2,this.ele.height/2);
+				this.ctx.closePath();
+				this.ctx.fill();
+				angle=j1+j/2;		
+				j1=j1+j;
+			}
+
+		}
+		
+		
+		//实例调用
+		var ele1=document.getElementById("can1");
+		var num1=[100,300,300,500,200];
+		
+		var ele2=document.getElementById("can2");
+		var num2=[100,300,300];
+		
+		
+		var can1 = new Canvas(ele1,num1);
+		var can2 = new Canvas(ele2,num2);
+		
+	</script>
+
+</body>
+</html>
