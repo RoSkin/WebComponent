@@ -1,0 +1,158 @@
+<html>  
+<head>  
+</head>  
+    <meta charset="GBK">  
+    <title>$.extent()拷贝</title>  
+	<script type="text/javascript" src="http://henan.qq.com/js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript">  
+       $(function() {  
+            var a = {  
+                name : 'zhangshan',  
+                age : 28,  
+                company : {  
+                    name : '腾讯',  
+                    address : '深圳',  
+                    size : 10000  
+                }  
+            };  
+            var b = {  
+                name : 'lisi',  
+                age : 30,  
+                company : {  
+                    name : '阿里巴巴',  
+                    address : '杭州'  
+                },  
+                stature : '172cm'  
+            };  
+            var c = $.extend({},a,b); //如果我们想保留原对象，我们可以通过传递一个空对象作为目标： 
+            console.log('a:' + JSON.stringify(a));  
+            console.log('b:' + JSON.stringify(b));  
+            console.log('c:' + JSON.stringify(c));  
+        });  
+		
+		
+		
+		
+		/*
+			//深拷贝  $.extend(true,a,b)
+			
+		*/
+		$(function(){  
+			 var a = {  
+					name : 'zhangshan',  
+					age : 28,  
+					company : {  
+						name : '腾讯',  
+						address : '深圳',  
+						size : 10000  
+					}  
+				};  
+				var b = {  
+					name : 'lisi',  
+					age : 30,  
+					company : {  
+						name : '阿里巴巴',  
+						address : '杭州'  
+					},  
+					stature : '172cm'  
+				};  
+				var c = $.extend(true,{},a,b);  
+				a.name = 'zhangshan01';  
+				b.name = 'lisi01';  
+				b.company.address = 'shengzhen';  
+				console.log('a:' + JSON.stringify(a));  
+				console.log('b:' + JSON.stringify(b));  
+				console.log('c:' + JSON.stringify(c));  
+		})
+		
+		/* $.extend()源码
+		jQuery.extend = jQuery.fn.extend = function() {
+			var options, name, src, copy, copyIsArray, clone,
+			//这里需要判断传进来的参数，如果第一个布尔值是true则会赋值给参数deep进行深拷贝
+				target = arguments[ 0 ] || {},
+				i = 1,
+				length = arguments.length,
+				deep = false;
+
+			// Handle a deep copy situation
+			if ( typeof target === "boolean" ) {
+				deep = target;
+
+				// Skip the boolean and the target
+				//判断完是否深拷贝，将后续参数传给target，准备真正开始处理要拷贝的参数
+				target = arguments[ i ] || {};
+				i++;
+			}
+
+			// Handle case when target is a string or something (possible in deep copy)
+			//如果target（此处target已经不是布尔值了，而是接受扩展的对象了）不是obj类型也不是function就赋一个空对象
+			if ( typeof target !== "object" && !jQuery.isFunction( target ) ) {
+				target = {};
+			}
+
+			// Extend jQuery itself if only one argument is passed
+			//i是1或2（取决于有没有第一个布尔参数），length是参数个数，如果只有一个参数，那么会扩展的是jQuery本身
+			if ( i === length ) {
+				target = this;
+				i--;
+			}
+
+			for ( ; i < length; i++ ) {
+
+				// Only deal with non-null/undefined values
+				//只处理不是空的参数
+				if ( ( options = arguments[ i ] ) != null ) {
+
+					// Extend the base object
+					for ( name in options ) {
+						//被扩展对象赋给src
+						src = target[ name ];
+						//需拷贝的剔除null的内容赋给copy
+						copy = options[ name ];
+
+						// Prevent never-ending loop
+						当被扩展的对象和拷贝的内容一样时直接跳过这次循环
+						if ( target === copy ) {
+							continue;
+						}
+
+						// Recurse if we're merging plain objects or arrays
+						//当需要深拷贝且拷贝的对象又是对象或数组需要进行递归，知道拷贝的是简单对象为止
+						if ( deep && copy && ( jQuery.isPlainObject( copy ) ||
+							( copyIsArray = jQuery.isArray( copy ) ) ) ) {
+
+							//因为后面还要再调用这个深拷贝函数，要进行参数设置
+							if ( copyIsArray ) {
+								//上一次判断是否是数组为true，下一次还要判断设置回false
+								copyIsArray = false;
+								//再一层深拷贝需要被扩展的对象赋给clone
+								clone = src && jQuery.isArray( src ) ? src : [];
+
+							} else {
+								//和上面一样，这里是针对对象的设置
+								clone = src && jQuery.isPlainObject( src ) ? src : {};
+							}
+
+							// Never move original objects, clone them
+							//递归的方法，再调用jQuery.extend()又进行一次深拷贝
+							target[ name ] = jQuery.extend( deep, clone, copy );
+
+						// Don't bring in undefined values
+						//如果需拷贝的已经是个简单类型（除undefined外）直接赋值就行
+						} else if ( copy !== undefined ) {
+							target[ name ] = copy;
+						}
+					}
+				}
+			}
+
+			// Return the modified object
+			//返回值到需扩展的对象里
+			return target;
+		};
+		
+		*/
+    </script>  
+<body>  
+</body>  
+</html>  

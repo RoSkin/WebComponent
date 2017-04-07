@@ -1,0 +1,33 @@
+<html>
+<script>
+	var animal = {
+		type : "我是猫",
+		nation : "美国"
+	}
+	
+	var cat = {
+		color : "我是黄色的猫"
+	}
+	
+	//深拷贝（数组和对象的拷贝）
+	function deepCopy(p, c) {
+		var c = c || {};
+		for (var i in p) {
+			if (typeof p[i] === 'object') {
+				c[i] = (p[i].constructor === Array) ? [] : {};
+				deepCopy(p[i], c[i]);
+			} else {
+				c[i] = p[i];
+			}
+		}
+		return c;
+　　}
+	
+	animal.birthPlaces = ['北京','上海','香港'];
+	var cat = deepCopy(animal);	
+	cat.birthPlaces.push('厦门');
+	console.log(cat.type);
+	console.log(cat.nation);
+	console.log(cat.birthPlaces);
+</script>
+</html>

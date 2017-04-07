@@ -1,0 +1,27 @@
+<html>
+<script>
+	var animal = {
+		type : "我是猫",
+		nation : "美国"
+	}
+	
+	var cat = {
+		color : "我是黄色的猫"
+	}
+
+	//浅拷贝(拷贝基本类型的数据)
+	function extendCopy(p) {
+		var c = {};
+		for (var i in p) { 
+			c[i] = p[i];
+		}
+		
+		return c;
+	}
+	
+
+	var cat = extendCopy(animal);	
+	console.log(cat.type)
+	console.log(cat.nation)
+</script>
+</html>
