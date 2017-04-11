@@ -1,0 +1,163 @@
+<!DOCtype html>
+<html>
+<head>
+	<title>弹窗组件</title>
+	<style type="text/css">
+	*{margin:0;padding:0}
+	.dialogbg{width:100%;height:100%;position:fixed;top:0;left:0;background:rgba(0,0,0,.3);display:flex;z-index:99;font:14px "微软雅黑";color:#4a4a4a}
+	.dialog{width:300px;height:150px;margin:auto auto;background: #fff;border-radius: 2px;box-shadow: 0 1px 3px rgba(0,0,0,.3);
+	-webkit-animation:stop .5s 0s forwards; }
+	.btn{display:block;width:100px;height:30px;background:#f90;border:0 solid #000;line-height:30px;color:#fff;margin:20px;cursor:pointer}
+	.dialog-top{width:100%;height:100px;text-align:center;display:flex;color:#000}
+	.dialog-top p{margin:auto auto;padding:0 10px;}
+	.dialog-bom{width:100%;height:30px;line-height:30px;}
+	.dialog-bom a{display:inline-block;width:50px;float:right;text-align:center;cursor:pointer;margin-right:20px}
+	.dialogInp{width:80%;margin:0 auto;height:40px;margin:auto auto;line-height:40px;text-indent:5px;border:1px solid #eee;border-radius:5px;}
+	.dialog-bom-center a{display:block;width:50%;float:none;margin:0 auto}	
+	.confirm{display:block;width:50px !important;border-radius:3px;height:30px;background:#4db3ff;border:0 solid #000;line-height:30px;color:#fff;cursor:pointer;}
+	@-webkit-keyframes stop {
+		0% { -webkit-transform:translateY(-10px);transform:translateY(-10px);}    
+		100% {-webkit-transform:translateY(0);transform:translateY(0);}
+	}
+	</style>
+</head>
+<body>
+	
+	<button class="btn1">确认框</button>
+	<button class="btn2">提示框</button>
+	<button class="btn3">表单验证</button>
+	<button class="btn4">警示框</button>
+	
+	
+	<script type="text/javascript">
+	var Alert = function(ele,string,bgcolor){
+		this.ele = document.querySelector(ele);
+		this.string = string || "今天你见彭于晏了吗";
+		this.bgcolor = bgcolor || "#4db3ff";
+		this.show();
+	}
+	
+	
+	Alert.prototype = {
+		show :function(){
+		
+			/*
+			 * 阻止浏览器默认行为
+			*/
+			document.onkeydown=function(event){
+				  let e = event || window.event || arguments.callee.caller.arguments[0];
+				  if(e && e.keyCode==13){ // enter
+					return false;
+					}
+				  if(e && e.keyCode==32){ // space
+					  return false;
+					}            
+				 
+			}; 
+			
+			
+			this.ele.style.backgroundColor=this.bgcolor;
+			let cNames = this.ele.className+" "+'btn';
+			this.ele.className=cNames;	
+			this.onClick();
+		},
+		
+		onClick : function(){
+			let _this=this;	
+			this.ele.addEventListener('click',function(e){
+				let dialog = document.createElement("div");	
+				dialog.className = "dialogbg";				
+				document.body.appendChild(dialog);
+					let dialogHtml1=`
+						<div class="dialog">
+							<div class="dialog-top">
+								<p>`+_this.string +`</p>
+							</div>		
+							<div class="dialog-bom">
+								<a class="confirm">确定</a>
+								<a class="cancel">取消</a>
+							</div>
+					</div>`;
+					
+					let dialogHtml2=`
+						<div class="dialog">
+							<div class="dialog-top">
+								<p>`+_this.string +`</p>
+							</div>		
+							<div class="dialog-bom">
+								<a class="confirm">确定</a>		
+							</div>
+					</div>`;
+					
+					let dialogHtml3=`
+						<div class="dialog">
+							<div class="dialog-top">
+								<input type="text" class="dialogInp" placeholder=`+_this.string +`>
+							</div>		
+							<div class="dialog-bom" id="dialog-bom">
+								<a class="confirm">提交</a>						
+							</div>
+					</div>`;
+					
+					let dialogHtml4=`
+						<div class="dialog">
+							<div class="dialog-top">
+								<img src="warning.png" width="80" height="80" style="margin:20px auto 0">
+							</div>
+							<div class="dialog-bom dialog-bom-center" id="dialog-bom">
+								<a class="cancel">`+_this.string +`</a>						
+							</div>						
+					</div>`;
+				
+
+				let i=_this.ele.className;
+				i=i.replace(/[^0-9]/g,"");		
+				dialog.innerHTML= eval("dialogHtml"+i);			
+				if(document.querySelector(".confirm")){
+					document.querySelector(".confirm").addEventListener('click',function(){
+						dialog.remove();
+					}, false);
+				}
+				if(document.querySelector(".cancel")){
+					document.querySelector(".cancel").addEventListener('click',function(){
+						dialog.remove();
+					}, false)
+				}
+				
+				document.querySelector(".dialogbg").addEventListener('click',function(){
+					document.querySelector(".dialogbg").remove();				
+				},false)
+				
+				
+				document.querySelector(".dialog").addEventListener('click',function(ent){
+					if(document.all){	
+						window.event.cancelBubble=ture;
+					}else{
+						ent.stopPropagation()	
+					}					
+				},false)
+				
+				e.preventDefault();  
+			},true)
+		
+		
+		}
+	}
+	
+	
+	
+	/*
+	 * 实例调用
+	 */
+	
+	
+	let alert1 = new Alert(".btn1","今天你见彭于晏了吗?","#4db3ff");
+	let alert2 = new Alert(".btn2","今天你见彭于晏了吗?","#4db3ff");
+	let alert3 = new Alert(".btn3","今天你见彭于晏了吗?","#4db3ff");
+	let alert4 = new Alert(".btn4","请输入内容","#4db3ff");
+	
+	
+
+	</script>
+</body>
+</html>
